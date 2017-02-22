@@ -118,6 +118,7 @@ public class RushView extends View {
 
     public void initSixBorder() {
         mBorderNum = 6;
+        Log.e("pengfeng", "mBorderNum 1 = " + mBorderNum);
         angle = (float) (2 * Math.PI) / 6;
     }
 
@@ -131,8 +132,9 @@ public class RushView extends View {
         mWidth = w;
         mHeight = h;
         mRadius = w / 3;
-        mTopValue = mHeight;
-        Log.e("pengfeng", "mHeight = " + mHeight + "，top value = " + mTopValue);
+        mTopValue = mHeight / 2 + mRadius * Math.cos(Math.PI / mBorderNum);
+        Log.e("pengfeng", "mBorderNum 2 = " + mBorderNum);
+        Log.e("pengfeng", "mHeight = " + mHeight + "，top value = " + mTopValue + "， mRadius = " + mRadius + ", Math.cos(Math.PI / (mBorderNum * 2)) " + mRadius * Math.cos(Math.PI / (mBorderNum * 2)));
     }
 
     @Override
