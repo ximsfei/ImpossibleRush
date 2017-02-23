@@ -15,6 +15,8 @@ import com.ximsfei.rush.widget.RushView;
 
 import java.util.Random;
 
+import static com.ximsfei.rush.util.RushConstants.KEY_GAME_MODE_DEFAULT;
+
 public class PlayGameActivity extends AppCompatActivity {
 
     private RushView mRushView;
@@ -28,8 +30,13 @@ public class PlayGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
+        boolean defaultMode = getIntent().getBooleanExtra(KEY_GAME_MODE_DEFAULT, true);
         mRushView = (RushView) findViewById(R.id.rush_view);
-        mRushView.initSixBorder();
+        if (defaultMode) {
+            mRushView.initDefault();
+        } else {
+            mRushView.initSixBorder();
+        }
         mBall = (ImageView) findViewById(R.id.ball);
         mIndicator = mRandom.nextInt(mRushView.getBorderNum());
         mBall.setBackgroundColor(ResourcesCompat.getColor(getResources(), mRushView.getAreaColor(mIndicator), getTheme()));
