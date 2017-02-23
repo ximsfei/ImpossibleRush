@@ -15,7 +15,7 @@ import com.ximsfei.rush.widget.RushView;
 
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class PlayGameActivity extends AppCompatActivity {
 
     private RushView mRushView;
     private ImageView mBall;
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_play_game);
         mRushView = (RushView) findViewById(R.id.rush_view);
         mRushView.initSixBorder();
         mBall = (ImageView) findViewById(R.id.ball);
