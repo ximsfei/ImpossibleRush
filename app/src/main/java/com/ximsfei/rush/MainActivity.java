@@ -15,15 +15,27 @@ import static com.ximsfei.rush.util.RushConstants.KEY_GAME_MODE_DEFAULT;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button mFourBtn;
     private Button mSixBtn;
+    private Button mSettings;
+    private Button mRankings;
+    private int mScreenWidth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mScreenWidth = getResources().getDisplayMetrics().widthPixels;
         mFourBtn = (Button) findViewById(R.id.four);
         mFourBtn.setOnClickListener(this);
+        mFourBtn.setWidth(mScreenWidth / 2);
         mSixBtn = (Button) findViewById(R.id.six);
         mSixBtn.setOnClickListener(this);
+        mSixBtn.setWidth(mScreenWidth / 2);
+        mSettings = (Button) findViewById(R.id.settings);
+        mSettings.setOnClickListener(this);
+        mSettings.setWidth(mScreenWidth / 2);
+        mRankings = (Button) findViewById(R.id.ranking);
+        mRankings.setOnClickListener(this);
+        mRankings.setWidth(mScreenWidth / 2);
     }
 
     @Override

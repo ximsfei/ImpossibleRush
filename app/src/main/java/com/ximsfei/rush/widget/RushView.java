@@ -18,6 +18,10 @@ import android.view.View;
 public class RushView extends View {
 
     private static final int DEFAULT_BORDER_NUM = 4;
+    private static final int DEFAULT_RUSH_DURATION = 110;
+    private static final int SIX_RUSH_DURATION = 80;
+    private static final int DEFAULT_DURATION = 1200;
+    private static final int SIX_DURATION = 1600;
     private boolean mAnimStarted = false;
 
     private int mHeight;
@@ -71,7 +75,7 @@ public class RushView extends View {
         mAnimStarted = true;
         final ObjectAnimator anim = ObjectAnimator.ofFloat(RushView.this, "rotation",
                 getRotation(), getRotation() + 360 / mBorderNum);
-        anim.setDuration(100);
+        anim.setDuration(getRushDuration());
         anim.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -94,6 +98,14 @@ public class RushView extends View {
             }
         });
         anim.start();
+    }
+
+    private int getRushDuration() {
+        return mBorderNum == DEFAULT_BORDER_NUM ? DEFAULT_RUSH_DURATION : SIX_RUSH_DURATION;
+    }
+
+    public int getDuration() {
+        return mBorderNum == DEFAULT_BORDER_NUM ? DEFAULT_DURATION : SIX_DURATION;
     }
 
     public double getTopValue() {
@@ -131,7 +143,7 @@ public class RushView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         mWidth = w;
         mHeight = h;
-        mRadius = w / 3;
+        mRadius = w / (mBorderNum == DEFAULT_BORDER_NUM ? 3.3f : 4);
         mTopValue = mHeight / 2 + mRadius * Math.cos(Math.PI / mBorderNum);
         Log.e("pengfeng", "mBorderNum 2 = " + mBorderNum);
         Log.e("pengfeng", "mHeight = " + mHeight + "，top value = " + mTopValue + "， mRadius = " + mRadius + ", Math.cos(Math.PI / (mBorderNum * 2)) " + mRadius * Math.cos(Math.PI / (mBorderNum * 2)));
