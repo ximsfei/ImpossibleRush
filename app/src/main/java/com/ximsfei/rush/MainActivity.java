@@ -1,5 +1,7 @@
 package com.ximsfei.rush;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,7 @@ import com.ximsfei.rush.ui.BaseActivity;
 import com.ximsfei.rush.ui.PlayGameActivity;
 import com.ximsfei.rush.ui.RankingsActivity;
 import com.ximsfei.rush.ui.SettingsActivity;
+import com.ximsfei.rush.widget.RushView;
 
 import static com.ximsfei.rush.util.RushConstants.KEY_GAME_MODE_DEFAULT;
 
@@ -22,11 +25,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Button mSettings;
     private Button mRankings;
     private int mScreenWidth;
+    private RushView mRushView;
+    private ObjectAnimator mAnimator;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mRushView = (RushView) findViewById(R.id.rush_view);
+        mRushView.initSixBorder();
         mScreenWidth = getResources().getDisplayMetrics().widthPixels;
         mFourBtn = (Button) findViewById(R.id.four);
         mFourBtn.setOnClickListener(this);
@@ -40,6 +47,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mRankings = (Button) findViewById(R.id.ranking);
         mRankings.setOnClickListener(this);
         mRankings.setWidth(mScreenWidth / 2);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startAnim();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopAnim();
+    }
+
+    private void stopAnim() {
+        if (mAnimator != null) {
+            mAnimator.cancel();
+        }
+    }
+
+    private void startAnim() {
+        mAnimator = ObjectAnimator.ofFloat(mRushView, "rotation", 0, 360);
+        mAnimator.setDuration(mRushView.getDuration());
+        mAnimator.setRepeatCount(Integer.MAX_VALUE);
+        mAnimator.setRepeatMode(ValueAnimator.RESTART);
+        mAnimator.start();
     }
 
     @Override

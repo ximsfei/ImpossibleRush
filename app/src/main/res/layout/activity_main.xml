@@ -10,6 +10,11 @@
         android:layout_centerInParent="true"
         android:orientation="vertical">
 
+        <com.ximsfei.rush.widget.RushView
+            android:id="@+id/rush_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <Button
             android:id="@+id/four"
             android:layout_width="wrap_content"
