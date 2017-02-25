@@ -14,4 +14,17 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+    <style name="ActivityAnimation" mce_bogus="1" parent="android:Animation">
+        <item name="@android:activityOpenEnterAnimation">@anim/activity_open_enter</item>
+        <item name="@android:activityOpenExitAnimation">@anim/activity_open_exit</item>
+        <item name="@android:activityCloseEnterAnimation">@anim/activity_close_enter</item>
+        <item name="@android:activityCloseExitAnimation">@anim/activity_close_exit</item>
+    </style>
+
+    <style name="DialogAnimation" mce_bogus="1" parent="android:Animation">
+        <item name="@android:activityOpenEnterAnimation">@anim/dialog_open_enter</item>
+        <item name="@android:activityOpenExitAnimation">@anim/dialog_open_exit</item>
+        <item name="@android:activityCloseEnterAnimation">@anim/dialog_close_enter</item>
+        <item name="@android:activityCloseExitAnimation">@anim/dialog_close_exit</item>
+    </style>
 </resources>

@@ -4,14 +4,12 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +26,7 @@ import java.util.Random;
 
 import static com.ximsfei.rush.util.RushConstants.KEY_GAME_MODE_DEFAULT;
 
-public class PlayGameActivity extends AppCompatActivity {
+public class PlayGameActivity extends BaseActivity {
 
     private static final int START_GAME = 0;
     private static final int COUNT_DOWN = 1;
@@ -187,11 +185,13 @@ public class PlayGameActivity extends AppCompatActivity {
                 } else {
                     mBall.setVisibility(View.GONE);
                     mRefresh.setVisibility(View.VISIBLE);
-                    ContentValues values = new ContentValues();
-                    values.put(DBHelper.SCORE, count);
-                    values.put(DBHelper.MODE, mRushView.getBorderNum());
-                    DBHelper.get().insert(values);
-                    count = 0;
+                    if (count != 0) {
+                        ContentValues values = new ContentValues();
+                        values.put(DBHelper.SCORE, count);
+                        values.put(DBHelper.MODE, mRushView.getBorderNum());
+                        DBHelper.get().insert(values);
+                        count = 0;
+                    }
                     playDieMusic();
                     animation.cancel();
                 }

@@ -71,7 +71,9 @@ public class DBHelper {
                     Score score = new Score();
                     score.mMode = c.getInt(c.getColumnIndex(MODE));
                     score.mScore = c.getInt(c.getColumnIndex(SCORE));
-                    scores.add(score);
+                    if (score.mScore > 0) {
+                        scores.add(score);
+                    }
                     index++;
                 }
             }
