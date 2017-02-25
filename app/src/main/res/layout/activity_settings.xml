@@ -28,7 +28,7 @@
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/btn_background_blue"
+        android:background="@drawable/btn_background_gray"
         android:text="设      置"
         android:textColor="@android:color/white" />
 </RelativeLayout>

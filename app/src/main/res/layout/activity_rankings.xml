@@ -34,7 +34,7 @@
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/btn_background_gray"
+        android:background="@drawable/btn_background_blue"
         android:text="排  行  榜"
         android:textColor="@android:color/white" />
 </RelativeLayout>
