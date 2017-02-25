@@ -36,12 +36,14 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true" />
 
-        <ImageView
+        <Button
             android:id="@+id/refresh"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/refresh"
+            android:background="@drawable/btn_background_yellow"
+            android:text="重新开始"
+            android:textColor="@android:color/white"
             android:visibility="gone" />
 
         <Button

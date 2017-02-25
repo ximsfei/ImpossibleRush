@@ -13,6 +13,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,7 +37,7 @@ public class PlayGameActivity extends BaseActivity {
     private int mScreenHeight;
     private Random mRandom = new Random();
     private int mIndicator;
-    private ImageView mRefresh;
+    private Button mRefresh;
     private ImageView mCountImage;
     private TextView mTotalText;
     private MediaPlayer mMediaPlayer;
@@ -96,7 +97,7 @@ public class PlayGameActivity extends BaseActivity {
         mIndicator = mRandom.nextInt(mRushView.getBorderNum());
         mBall.setBackgroundColor(ResourcesCompat.getColor(getResources(), mRushView.getAreaColor(mIndicator), getTheme()));
         mCountImage = (ImageView) findViewById(R.id.count);
-        mRefresh = (ImageView) findViewById(R.id.refresh);
+        mRefresh = (Button) findViewById(R.id.refresh);
         mRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
