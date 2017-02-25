@@ -3,14 +3,16 @@ package com.ximsfei.rush;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.ximsfei.rush.util.SPUtils;
 
 /**
  * Created by ximsfei on 17-2-25.
  */
 
 public class SettingsActivity extends BaseDialogActivity {
-    private ImageView mClose;
+    private TextView mSoundText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -18,11 +20,13 @@ public class SettingsActivity extends BaseDialogActivity {
         setContentView(R.layout.activity_settings);
         initWindow();
 
-        mClose = (ImageView) findViewById(R.id.close);
-        mClose.setOnClickListener(new View.OnClickListener() {
+        mSoundText = (TextView) findViewById(R.id.sound);
+        mSoundText.setText(SPUtils.getInstance().getSound() ? R.string.sound_on : R.string.sound_off);
+        mSoundText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                SPUtils.getInstance().setSound(!SPUtils.getInstance().getSound()).commitEditor();
+                mSoundText.setText(SPUtils.getInstance().getSound() ? R.string.sound_on : R.string.sound_off);
             }
         });
     }

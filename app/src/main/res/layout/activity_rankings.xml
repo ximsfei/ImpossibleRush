@@ -13,12 +13,13 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/close"
+    <Button
+        android:id="@+id/ranking"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
-        android:src="@drawable/btn_close" />
-
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_background_gray"
+        android:text="排  行  榜"
+        android:textColor="@android:color/white" />
 </RelativeLayout>

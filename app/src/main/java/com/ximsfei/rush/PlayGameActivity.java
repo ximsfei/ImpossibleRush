@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ximsfei.rush.util.SPUtils;
 import com.ximsfei.rush.widget.RushView;
 
 import java.io.IOException;
@@ -194,6 +195,9 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private void resetMusic() {
+        if (!SPUtils.getInstance().getSound()) {
+            return;
+        }
         AssetFileDescriptor fileDescriptor;
         try {
             fileDescriptor = getAssets().openFd("rush_point.ogg");
@@ -209,10 +213,16 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private void playPointMusic() {
+        if (!SPUtils.getInstance().getSound()) {
+            return;
+        }
         mMediaPlayer.start();
     }
 
     private void playDieMusic() {
+        if (!SPUtils.getInstance().getSound()) {
+            return;
+        }
         AssetFileDescriptor fileDescriptor;
         try {
             fileDescriptor = getAssets().openFd("rush_die.ogg");
