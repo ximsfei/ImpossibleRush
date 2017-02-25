@@ -102,7 +102,6 @@ public class PlayGameActivity extends BaseActivity {
             public void onClick(View v) {
                 mRefresh.setVisibility(View.GONE);
                 mTotalText.setText(String.valueOf(0));
-                resetMusic();
                 restartGame();
             }
         });
@@ -113,7 +112,6 @@ public class PlayGameActivity extends BaseActivity {
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mScore = SPUtils.getInstance().getLastScore(mRushView.getBorderNum());
         mTotalText.setText(String.valueOf(mScore));
-        resetMusic();
         startGame();
     }
 
@@ -189,16 +187,14 @@ public class PlayGameActivity extends BaseActivity {
                     mBall.setBackgroundColor(ResourcesCompat.getColor(getResources(),
                             mRushView.getAreaColor(mIndicator), getTheme()));
                     Log.e("pengfeng", "count = " + mScore);
+                    if (mScore == Integer.MAX_VALUE) {
+                        saveScore();
+                    }
                 } else {
                     mBall.setVisibility(View.GONE);
                     mRefresh.setVisibility(View.VISIBLE);
                     if (mScore != 0) {
-                        ContentValues values = new ContentValues();
-                        values.put(DBHelper.SCORE, mScore);
-                        values.put(DBHelper.MODE, mRushView.getBorderNum());
-                        DBHelper.get().insert(values);
-                        mScore = 0;
-                        SPUtils.getInstance().setLastScore(mRushView.getBorderNum(), 0);
+                        saveScore();
                     }
                     playDieMusic();
                     animation.cancel();
@@ -210,7 +206,16 @@ public class PlayGameActivity extends BaseActivity {
         mAnimator.start();
     }
 
-    private void resetMusic() {
+    private void saveScore() {
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.SCORE, mScore);
+        values.put(DBHelper.MODE, mRushView.getBorderNum());
+        DBHelper.get().insert(values);
+        mScore = 0;
+        SPUtils.getInstance().setLastScore(mRushView.getBorderNum(), 0);
+    }
+
+    private void playPointMusic() {
         if (!SPUtils.getInstance().getSound()) {
             return;
         }
@@ -225,12 +230,6 @@ public class PlayGameActivity extends BaseActivity {
             mMediaPlayer.prepare();
         } catch (IOException e1) {
             e1.printStackTrace();
-        }
-    }
-
-    private void playPointMusic() {
-        if (!SPUtils.getInstance().getSound()) {
-            return;
         }
         mMediaPlayer.start();
     }
