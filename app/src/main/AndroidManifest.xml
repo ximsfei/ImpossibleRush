@@ -19,14 +19,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PlayGameActivity"
+            android:name=".ui.PlayGameActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".ui.SettingsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Dialog" />
         <activity
-            android:name=".RankingsActivity"
+            android:name=".ui.RankingsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Dialog" />
     </application>

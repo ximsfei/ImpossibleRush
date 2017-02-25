@@ -1,4 +1,4 @@
-package com.ximsfei.rush;
+package com.ximsfei.rush.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;

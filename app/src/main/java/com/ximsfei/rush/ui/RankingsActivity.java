@@ -1,7 +1,9 @@
-package com.ximsfei.rush;
+package com.ximsfei.rush.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
+import com.ximsfei.rush.R;
 
 /**
  * Created by ximsfei on 17-2-25.

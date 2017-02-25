@@ -1,10 +1,11 @@
-package com.ximsfei.rush;
+package com.ximsfei.rush.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
+import com.ximsfei.rush.R;
 import com.ximsfei.rush.util.SPUtils;
 
 /**

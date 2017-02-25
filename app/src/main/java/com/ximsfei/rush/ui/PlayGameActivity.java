@@ -1,4 +1,4 @@
-package com.ximsfei.rush;
+package com.ximsfei.rush.ui;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ximsfei.rush.R;
 import com.ximsfei.rush.util.SPUtils;
 import com.ximsfei.rush.widget.RushView;
 

@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.ximsfei.rush.ui.PlayGameActivity;
+import com.ximsfei.rush.ui.RankingsActivity;
+import com.ximsfei.rush.ui.SettingsActivity;
+
 import static com.ximsfei.rush.util.RushConstants.KEY_GAME_MODE_DEFAULT;
 
 /**
