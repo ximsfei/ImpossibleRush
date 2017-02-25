@@ -2,6 +2,7 @@ package com.ximsfei.rush;
 
 import android.app.Application;
 
+import com.ximsfei.rush.db.DBHelper;
 import com.ximsfei.rush.util.SPUtils;
 
 /**
@@ -13,5 +14,6 @@ public class RushApplication extends Application {
     public void onCreate() {
         super.onCreate();
         SPUtils.init(this);
+        DBHelper.init(this);
     }
 }

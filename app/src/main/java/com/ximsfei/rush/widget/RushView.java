@@ -17,7 +17,7 @@ import android.view.View;
 
 public class RushView extends View {
 
-    private static final int DEFAULT_BORDER_NUM = 4;
+    public static final int DEFAULT_BORDER_NUM = 4;
     private static final int DEFAULT_RUSH_DURATION = 110;
     private static final int SIX_RUSH_DURATION = 80;
     private static final int DEFAULT_DURATION = 1200;

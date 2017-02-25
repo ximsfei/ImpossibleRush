@@ -14,7 +14,7 @@ public class BaseDialogActivity extends AppCompatActivity {
         DisplayMetrics dm = getResources().getDisplayMetrics();
         WindowManager.LayoutParams p = getWindow().getAttributes();
         p.width = (int) (dm.widthPixels * 0.7);
-        p.height = (int) (dm.heightPixels * 0.6);
+        p.height = (int) (dm.heightPixels * 0.5);
         getWindow().setAttributes(p);
     }
 }

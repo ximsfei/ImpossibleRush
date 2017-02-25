@@ -3,6 +3,7 @@ package com.ximsfei.rush.ui;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ximsfei.rush.R;
+import com.ximsfei.rush.db.DBHelper;
 import com.ximsfei.rush.util.SPUtils;
 import com.ximsfei.rush.widget.RushView;
 
@@ -185,6 +187,11 @@ public class PlayGameActivity extends AppCompatActivity {
                 } else {
                     mBall.setVisibility(View.GONE);
                     mRefresh.setVisibility(View.VISIBLE);
+                    ContentValues values = new ContentValues();
+                    values.put(DBHelper.SCORE, count);
+                    values.put(DBHelper.MODE, mRushView.getBorderNum());
+                    DBHelper.get().insert(values);
+                    count = 0;
                     playDieMusic();
                     animation.cancel();
                 }
