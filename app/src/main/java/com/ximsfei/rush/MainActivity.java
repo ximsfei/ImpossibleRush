@@ -51,6 +51,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent6.putExtra(KEY_GAME_MODE_DEFAULT, false);
                 startActivity(intent6);
                 break;
+            case R.id.settings:
+                Intent settingIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingIntent);
+                break;
+            case R.id.ranking:
+                Intent rankingIntent = new Intent(this, RankingsActivity.class);
+                startActivity(rankingIntent);
         }
     }
 }

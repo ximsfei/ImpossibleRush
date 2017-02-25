@@ -108,12 +108,12 @@ public class PlayGameActivity extends AppCompatActivity {
         mMediaPlayer = new MediaPlayer();
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         resetMusic();
+        startGame();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        startGame();
     }
 
     @Override

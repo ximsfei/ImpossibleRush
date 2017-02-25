@@ -20,6 +20,14 @@
         <activity
             android:name=".PlayGameActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Dialog" />
+        <activity
+            android:name=".RankingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Dialog" />
     </application>
 
 </manifest>
