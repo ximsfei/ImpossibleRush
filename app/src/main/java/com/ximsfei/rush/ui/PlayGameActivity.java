@@ -40,6 +40,8 @@ public class PlayGameActivity extends BaseActivity {
     private ImageView mCountImage;
     private TextView mTotalText;
     private MediaPlayer mMediaPlayer;
+    private ObjectAnimator mAnimator;
+    private int mScore = 0;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -109,6 +111,8 @@ public class PlayGameActivity extends BaseActivity {
 
         mMediaPlayer = new MediaPlayer();
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mScore = SPUtils.getInstance().getLastScore(mRushView.getBorderNum());
+        mTotalText.setText(String.valueOf(mScore));
         resetMusic();
         startGame();
     }
@@ -131,6 +135,10 @@ public class PlayGameActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mAnimator != null) {
+            mAnimator.cancel();
+        }
+        SPUtils.getInstance().setLastScore(mRushView.getBorderNum(), mScore).commitEditor();
         mHandler.removeCallbacksAndMessages(null);
     }
 
@@ -148,14 +156,13 @@ public class PlayGameActivity extends BaseActivity {
         Log.d("pengfeng", "mDist = " + (mScreenHeight - mRushView.getTopValue()));
 
         mBall.setVisibility(View.VISIBLE);
-        ObjectAnimator animator = ObjectAnimator.ofFloat(mBall, "translationY",
+        mAnimator = ObjectAnimator.ofFloat(mBall, "translationY",
                 0, (int) (mScreenHeight - mRushView.getTopValue()));
-        animator.setDuration(mRushView.getDuration());
-        animator.setRepeatCount(Integer.MAX_VALUE);
-        animator.setRepeatMode(ValueAnimator.RESTART);
+        mAnimator.setDuration(mRushView.getDuration());
+        mAnimator.setRepeatCount(Integer.MAX_VALUE);
+        mAnimator.setRepeatMode(ValueAnimator.RESTART);
 //      animator.setInterpolator(value)
-        animator.addListener(new Animator.AnimatorListener() {
-            int count = 0;
+        mAnimator.addListener(new Animator.AnimatorListener() {
 
             @Override
             public void onAnimationStart(Animator animation) {
@@ -175,22 +182,23 @@ public class PlayGameActivity extends BaseActivity {
             public void onAnimationRepeat(Animator animation) {
                 boolean hit = mRushView.hit(mIndicator);
                 if (hit) {
-                    count++;
-                    mTotalText.setText(String.valueOf(count));
+                    mScore++;
+                    mTotalText.setText(String.valueOf(mScore));
                     playPointMusic();
                     mIndicator = mRandom.nextInt(mRushView.getBorderNum());
                     mBall.setBackgroundColor(ResourcesCompat.getColor(getResources(),
                             mRushView.getAreaColor(mIndicator), getTheme()));
-                    Log.e("pengfeng", "count = " + count);
+                    Log.e("pengfeng", "count = " + mScore);
                 } else {
                     mBall.setVisibility(View.GONE);
                     mRefresh.setVisibility(View.VISIBLE);
-                    if (count != 0) {
+                    if (mScore != 0) {
                         ContentValues values = new ContentValues();
-                        values.put(DBHelper.SCORE, count);
+                        values.put(DBHelper.SCORE, mScore);
                         values.put(DBHelper.MODE, mRushView.getBorderNum());
                         DBHelper.get().insert(values);
-                        count = 0;
+                        mScore = 0;
+                        SPUtils.getInstance().setLastScore(mRushView.getBorderNum(), 0);
                     }
                     playDieMusic();
                     animation.cancel();
@@ -199,7 +207,7 @@ public class PlayGameActivity extends BaseActivity {
             }
         });
 
-        animator.start();
+        mAnimator.start();
     }
 
     private void resetMusic() {

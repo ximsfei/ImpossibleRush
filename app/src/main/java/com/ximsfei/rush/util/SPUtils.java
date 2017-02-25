@@ -9,8 +9,8 @@ import android.content.SharedPreferences;
 
 public class SPUtils {
     private static final String FILE_NAME = "meta-data";
-    private static final String KEY_SOUND = "sound-key";
-    private static final String KEY_LAST_SCORE = "last-score-key";
+    private static final String KEY_SOUND = "key-sound";
+    private static final String KEY_LAST_SCORE = "key-last-score-mode-";
 
     private static SPUtils sInstance;
     private final Context mApp;
@@ -46,13 +46,13 @@ public class SPUtils {
         return mPref.getBoolean(KEY_SOUND, true);
     }
 
-    public SPUtils setLastScore(int lastScore) {
-        mEditor.putInt(KEY_LAST_SCORE, lastScore);
+    public SPUtils setLastScore(int mode, int lastScore) {
+        mEditor.putInt(KEY_LAST_SCORE + mode, lastScore);
         return this;
     }
 
-    public int getLastScore() {
-        return mPref.getInt(KEY_LAST_SCORE, 0);
+    public int getLastScore(int mode) {
+        return mPref.getInt(KEY_LAST_SCORE + mode, 0);
     }
 
     public void commitEditor() {
