@@ -29,7 +29,6 @@ public class RushView extends View {
 
     private Paint areaPaint;
 
-    private float x, y;
     private float mRadius;
 
     private float angle = (float) ((2 * Math.PI) / DEFAULT_BORDER_NUM);
@@ -176,6 +175,7 @@ public class RushView extends View {
 
     private void drawArea(Canvas canvas) {
         Path path = new Path();
+        float x, y, x1, y1;
         for (int i = 1; i <= mBorderNum; i++) {
             int color = ResourcesCompat.getColor(getResources(), areaColor[i - 1], getResources().newTheme());
             areaPaint.setColor(color);
@@ -184,9 +184,9 @@ public class RushView extends View {
                     + angle * 3 / (mBorderNum == DEFAULT_BORDER_NUM ? 2 : 1)) * mRadius);
             y = (float) (Math.sin(i % mBorderNum * angle
                     + angle * 3 / (mBorderNum == DEFAULT_BORDER_NUM ? 2 : 1)) * mRadius);
-            float x1 = (float) (Math.cos((i + 1) % mBorderNum * angle
+            x1 = (float) (Math.cos((i + 1) % mBorderNum * angle
                     + angle * 3 / (mBorderNum == DEFAULT_BORDER_NUM ? 2 : 1)) * mRadius);
-            float y1 = (float) (Math.sin((i + 1) % mBorderNum * angle
+            y1 = (float) (Math.sin((i + 1) % mBorderNum * angle
                     + angle * 3 / (mBorderNum == DEFAULT_BORDER_NUM ? 2 : 1)) * mRadius);
             Log.e("pengfeng", "x = " + x + ", y = " + y + ", x1 = " + x1 + ", y1 = " + y1);
             path.lineTo(x, y);
