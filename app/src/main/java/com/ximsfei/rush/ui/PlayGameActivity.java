@@ -14,11 +14,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.qq.e.ads.banner.ADSize;
+import com.qq.e.ads.banner.AbstractBannerADListener;
+import com.qq.e.ads.banner.BannerView;
 import com.ximsfei.rush.R;
 import com.ximsfei.rush.db.DBHelper;
+import com.ximsfei.rush.util.RushConstants;
 import com.ximsfei.rush.util.SPUtils;
 import com.ximsfei.rush.widget.RushView;
 
@@ -34,6 +39,8 @@ public class PlayGameActivity extends BaseActivity {
     private int mCountDown = 3;
     private RushView mRushView;
     private ImageView mBall;
+    private FrameLayout mBannerContainer;
+    private BannerView mBannerView;
     private int mScreenHeight;
     private Random mRandom = new Random();
     private int mIndicator;
@@ -96,6 +103,8 @@ public class PlayGameActivity extends BaseActivity {
         mBall = (ImageView) findViewById(R.id.ball);
         mIndicator = mRandom.nextInt(mRushView.getBorderNum());
         mBall.setBackgroundColor(ResourcesCompat.getColor(getResources(), mRushView.getAreaColor(mIndicator), getTheme()));
+        mBannerContainer = (FrameLayout) findViewById(R.id.bannerContainer);
+        initBanner();
         mCountImage = (ImageView) findViewById(R.id.count);
         mRefresh = (Button) findViewById(R.id.refresh);
         mRefresh.setOnClickListener(new View.OnClickListener() {
@@ -152,11 +161,12 @@ public class PlayGameActivity extends BaseActivity {
     private void dropDown() {
         Log.d("pengfeng", "mScreenHeight = " + mScreenHeight);
         Log.d("pengfeng", "mTopValue = " + mRushView.getTopValue());
-        Log.d("pengfeng", "mDist = " + (mScreenHeight - mRushView.getTopValue()));
 
+        int dropHeight = (int) (mScreenHeight - mRushView.getTopValue() - mBannerContainer.getMeasuredHeight());
+        Log.d("pengfeng", "mDist = " + dropHeight);
+//        int dropHeight = (int) (mScreenHeight - mRushView.getTopValue());
         mBall.setVisibility(View.VISIBLE);
-        mAnimator = ObjectAnimator.ofFloat(mBall, "translationY",
-                0, (int) (mScreenHeight - mRushView.getTopValue()));
+        mAnimator = ObjectAnimator.ofFloat(mBall, "translationY", 0, dropHeight);
         mAnimator.setDuration(mRushView.getDuration());
         mAnimator.setRepeatCount(Integer.MAX_VALUE);
         mAnimator.setRepeatMode(ValueAnimator.RESTART);
@@ -252,5 +262,26 @@ public class PlayGameActivity extends BaseActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void initBanner() {
+        mBannerView = new BannerView(this, ADSize.BANNER, RushConstants.APPID, RushConstants.BannerPosID);
+        // 注意：如果开发者的banner不是始终展示在屏幕中的话，请关闭自动刷新，否则将导致曝光率过低。
+        // 并且应该自行处理：当banner广告区域出现在屏幕后，再手动loadAD。
+        mBannerView.setRefresh(30);
+        mBannerView.setADListener(new AbstractBannerADListener() {
+
+            @Override
+            public void onNoAD(int arg0) {
+                Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
+            }
+
+            @Override
+            public void onADReceiv() {
+                Log.i("AD_DEMO", "ONBannerReceive");
+            }
+        });
+        mBannerContainer.addView(mBannerView);
+        mBannerView.loadAD();
     }
 }

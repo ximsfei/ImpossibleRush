@@ -6,9 +6,17 @@
     android:background="@drawable/background"
     tools:context="com.ximsfei.rush.ui.PlayGameActivity">
 
+    <FrameLayout
+        android:id="@+id/bannerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+    </FrameLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/bannerContainer"
         android:background="@drawable/game_background">
 
         <ImageView
