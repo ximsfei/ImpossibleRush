@@ -2,4 +2,6 @@
     <string name="app_name">旋转颜色</string>
     <string name="sound_on">声音 开</string>
     <string name="sound_off">声音 关</string>
+
+    <string name="click_to_skip">点击跳过</string>
 </resources>
