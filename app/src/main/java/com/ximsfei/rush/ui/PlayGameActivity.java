@@ -168,9 +168,8 @@ public class PlayGameActivity extends BaseActivity {
         mBall.setVisibility(View.VISIBLE);
         mAnimator = ObjectAnimator.ofFloat(mBall, "translationY", 0, dropHeight);
         mAnimator.setDuration(mRushView.getDuration());
-        mAnimator.setRepeatCount(Integer.MAX_VALUE);
+        mAnimator.setRepeatCount(ValueAnimator.INFINITE);
         mAnimator.setRepeatMode(ValueAnimator.RESTART);
-//      animator.setInterpolator(value)
         mAnimator.addListener(new Animator.AnimatorListener() {
 
             @Override

@@ -70,7 +70,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void startAnim() {
         mAnimator = ObjectAnimator.ofFloat(mRushView, "rotation", 0, 360);
         mAnimator.setDuration(mRushView.getDuration());
-        mAnimator.setRepeatCount(Integer.MAX_VALUE);
+        mAnimator.setRepeatCount(ValueAnimator.INFINITE);
         mAnimator.setRepeatMode(ValueAnimator.RESTART);
         mAnimator.start();
     }
