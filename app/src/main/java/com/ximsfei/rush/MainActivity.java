@@ -11,7 +11,6 @@ import com.ximsfei.rush.ui.BaseActivity;
 import com.ximsfei.rush.ui.PlayGameActivity;
 import com.ximsfei.rush.ui.RankingsActivity;
 import com.ximsfei.rush.ui.SettingsActivity;
-import com.ximsfei.rush.util.SPUtils;
 import com.ximsfei.rush.widget.RushView;
 
 import static com.ximsfei.rush.util.RushConstants.KEY_GAME_MODE_DEFAULT;

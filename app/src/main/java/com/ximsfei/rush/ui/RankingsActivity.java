@@ -9,11 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.qq.e.ads.interstitial.AbstractInterstitialADListener;
-import com.qq.e.ads.interstitial.InterstitialAD;
 import com.ximsfei.rush.R;
 import com.ximsfei.rush.db.DBHelper;
-import com.ximsfei.rush.util.RushConstants;
 
 import java.util.List;
 
@@ -25,14 +22,12 @@ public class RankingsActivity extends BaseDialogActivity {
 
     private ListView mListView;
     private TextView mGlobalText;
-    private InterstitialAD iad;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rankings);
         initWindow();
-        showAD();
 
         mGlobalText = (TextView) findViewById(R.id.global);
         mGlobalText.setText("全网最高分: " + Integer.MAX_VALUE);
@@ -68,29 +63,5 @@ public class RankingsActivity extends BaseDialogActivity {
             tv.setText(getItem(position).toString());
             return tv;
         }
-    }
-
-    private InterstitialAD getIAD() {
-        if (iad == null) {
-            iad = new InterstitialAD(this, RushConstants.APPID, RushConstants.InterteristalPosID);
-        }
-        return iad;
-    }
-
-    private void showAD() {
-        getIAD().setADListener(new AbstractInterstitialADListener() {
-
-            @Override
-            public void onNoAD(int arg0) {
-                Log.i("AD_DEMO", "LoadInterstitialAd Fail:" + arg0);
-            }
-
-            @Override
-            public void onADReceive() {
-                Log.i("AD_DEMO", "onADReceive");
-                iad.show();
-            }
-        });
-        iad.loadAD();
     }
 }
