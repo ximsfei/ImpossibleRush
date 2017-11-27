@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -177,7 +176,7 @@ public class RushView extends View {
         Path path = new Path();
         float x, y, x1, y1;
         for (int i = 1; i <= mBorderNum; i++) {
-            int color = ResourcesCompat.getColor(getResources(), areaColor[i - 1], getResources().newTheme());
+            int color = getContext().getResources().getColor(areaColor[i - 1]);
             areaPaint.setColor(color);
             path.reset();
             x = (float) (Math.cos(i % mBorderNum * angle

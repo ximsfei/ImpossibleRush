@@ -9,7 +9,6 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.content.res.ResourcesCompat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -95,7 +94,7 @@ public class PlayGameActivity extends BaseActivity {
         }
         mBall = (ImageView) findViewById(R.id.ball);
         mIndicator = mRandom.nextInt(mRushView.getBorderNum());
-        mBall.setBackgroundColor(ResourcesCompat.getColor(getResources(), mRushView.getAreaColor(mIndicator), getTheme()));
+        mBall.setBackgroundColor(getResources().getColor(mRushView.getAreaColor(mIndicator)));
         mCountImage = (ImageView) findViewById(R.id.count);
         mRefresh = (Button) findViewById(R.id.refresh);
         mRefresh.setOnClickListener(new View.OnClickListener() {
@@ -185,8 +184,7 @@ public class PlayGameActivity extends BaseActivity {
                     mTotalText.setText(String.valueOf(mScore));
                     playPointMusic();
                     mIndicator = mRandom.nextInt(mRushView.getBorderNum());
-                    mBall.setBackgroundColor(ResourcesCompat.getColor(getResources(),
-                            mRushView.getAreaColor(mIndicator), getTheme()));
+                    mBall.setBackgroundColor(getResources().getColor(mRushView.getAreaColor(mIndicator)));
                     Log.e("pengfeng", "count = " + mScore);
                     if (mScore == Integer.MAX_VALUE) {
                         saveScore();
